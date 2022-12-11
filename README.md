@@ -14,3 +14,9 @@ after work, hopefully also a minimum of 3 days per week.
 
 I am currently employed as a web developer at the IRCC who mainly works with Typescript in Node/NestJS and Angular. I am interested in pursuing more challenging projects
 such as graphics simulation and game development, so learning cpp is a must. I also have an interest in network development, primarily from my gaming hobby, so I have learned the basics of Go, which I hope to use in tandem with cpp to create multiplayer experiences, or at the very least a cool portfolio in web assembly.
+
+## Progress
+
+### December 11th 2022
+
+    Intro - Chapter 1.3
