@@ -10,6 +10,11 @@ I have worked with the language already but it has mostly been hacky projects an
 To update this repo a minimum of 3 times per week until I have worked through the entire course. Afterwards I will be pursuing cpp and go projects in my freetime
 after work, hopefully also a minimum of 3 days per week.
 
+## Notes
+
+- Best practice is brace initialization, eg: int a { 0 }; // if using value OR: int a {}; // if not using value
+- Dont make unused vars (obviously), but can use [[maybe_unused]] before a variable to remove unused warning
+
 ## About Me
 
 I am currently employed as a web developer at the IRCC who mainly works with Typescript in Node/NestJS and Angular. I am interested in pursuing more challenging projects
@@ -19,4 +24,4 @@ such as graphics simulation and game development, so learning cpp is a must. I a
 
 ### December 11th 2022
 
-    Intro - Chapter 1.3
+    Intro - Chapter 2.1
