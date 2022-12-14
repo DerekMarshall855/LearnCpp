@@ -24,3 +24,7 @@ such as graphics simulation and game development, so learning cpp is a must. I a
 ### December 12th 2022
 
     Chapter 2.1 - Chapter 3.1
+
+### December 14th 2022
+
+    Chapter 3.1 - Chapter 4.12

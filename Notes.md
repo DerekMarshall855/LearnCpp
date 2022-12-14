@@ -1,6 +1,6 @@
 ## Description
 
-Some short notes for my own benefit, jotting them down as I go
+Some short notes for my own benefit, jotting them down as I go. Not organized and likely never reading again lol.
 
 ## Notes
 
@@ -31,3 +31,51 @@ Some short notes for my own benefit, jotting them down as I go
 - Modern cpp has #pragma, but it shouldn't be used as header guards offer maximum portability
   - eg use: #pragma once
   - This does the same thing as a guard in a much simpler format, but again isn't great for portability
+- Can use preprocessor tags to have conditional debugging
+- Debuggers & Loggers are best practice (Not news)
+- Book recommends I follow best practice and do defensive coding
+- Use static analysis tool like sonarqube to find areas that aren't best practice compliant
+- Types with \_t are modern types, such as chat8_t and std::nullptr_t
+- Strings are not a fundamental type in C++, but you can do arrays of char or use std::string library
+- To be space efficient you can be specific with var sizes, but for better compatibility we shouldn't assume that variables are larger than the specified minimum size
+- Objects of fundamental data types are usually extremely fast
+- Can use sizeof() to determine size in bytes of a type or variable
+- Best practice: Prefer var shorthands (eg: use short instead of unsigned short int)
+- C++ wont round if dividing ints that turn into fractions, it will simply drop the remainder
+- Integers are default signed, can also defined them as unsigned (eg: unsigned int x{3})
+  - Unsigned can only be positive, but most devs avoid them
+  - Can lead to bad cases of overflow in simple problems like subtraction since below 0 it will overflow
+  - Unsigned are okay to use in bit manipulation and are unavoidable in some cases such as array indexing
+- Dealing with minimum width integers is annoying since some architectures may allow more bytes, to resolve this C99 introduced fixed width integers
+  - C++11 adopted these
+- Use <cstdint> to access
+- std::int8_t, uint8_t... all the way to 64 bit/8 byte.
+  - uint8_t are often treated like unsigned char, int8_t often treated like signed char
+  - Issues: Not always supported on architecture. Can be slower than a wider type on some architectures
+  - Eg: Your cpu may be better at processing a 64 bit int rather than a 32 bit int
+- C++ defines alternative ints that are guarenteed to be defined
+  - fast ints provide the fastest ints of a minimum width
+  - least ints provide the smallest ints of a minimum width
+- Integer best practice
+  - prefer int if size doesnt matter
+  - prefer std::int#\_t when storing a quantity of guaranteed range
+  - prefer std::uint#\_t for bit manipulation or when wrap behaviour is well defined
+  - avoid unsigned types for holding quantities
+  - avoid 8-bit fixed types
+  - avoid fast & least
+  - avoid compiler specific ints
+- Float best practice
+  - Always make sure default value/first assignment matches the type
+  - double y{5.0} defaults to double, for float use y{5.0f}
+  - Doing just y{5} is an integer
+- Default C++ does 6 digit percision, can use std::cout << std::setpercision(n) to set it to higher number
+  - Part of <iomanip> library
+- If percision is too low for a number we can get rounding error
+- Best practice: Favor double over float unless space is super important, leads to less floating point errors
+- Inf for infinity, NaN for not a number
+- Conditionals use if, else if, and else
+- char is stored as an integer and interpreted as an ascii character
+- Best practice is single quotes for chars
+- Best practice is to define with char, not int
+  - eg: both char ch{'a'} and char ch{97} work and produce the same thing, but the former is best practice
+  - Avoids mixing up ch{5} and ch{'5'} which would produce very different results
