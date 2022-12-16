@@ -79,3 +79,55 @@ Some short notes for my own benefit, jotting them down as I go. Not organized an
 - Best practice is to define with char, not int
   - eg: both char ch{'a'} and char ch{97} work and produce the same thing, but the former is best practice
   - Avoids mixing up ch{5} and ch{'5'} which would produce very different results
+- Using cin allows you to enter more than one character, but char only accepts one. This leads to it taking whatever is next in queue if available
+- String literals use double quotes, chars use single quotes
+  - Put standalone chars in single quotes as best practice, including escape sequeneces like '\n'
+  - Avoid multichar literals like '56'
+- Types like w_char should be avoided unless interfacing with windows api that specifies it.
+- C++ typically uses <> brackets for types
+- static_cast<type>(data) to cast data to a type
+- Constants must be init when defined
+- Uses const type id {value}; syntax
+- Don't use const for pass or return by value best practice
+- Prefer const over macros with substiution text
+- Runtime const uses function, compile time uses expression
+- Any var whos value is known at compile time and doesnt change should be a compile time const
+- compile time const use 'constexpr', runtime uses 'const'
+- For literals perfer suffix L (uppercase) over lowercase
+- 0 before number means its octal, 0x before means its hexidecimal
+- 0b follow by binary number assigned 16 bit binary
+- 0b11 is 3 in binary -> 0000 0000 0000 0011 (C++14 and up)
+- Can also do 0b0004 (0100), 0b00FF (1111 1111), etc where each column value is the hex cast to binary 0bFFFF being max value
+- To make long literals easier to read C++14 allows ' as a separater
+  - eg: 2'132'456'462 is easier to read than 2123456462
+  - Works for binary 0b0001'1101;
+- Can do binary output with #include <bitset>
+  - std::bitset<8> bin1{0b1100'0101}; (means 8 bits)
+  - Works for hex, binary
+- #include <string> to start working with strings
+  - std::string name {}; where std::string is the type
+  - Note strings should be in double quotes ""
+  - eg: std::string name { "Derek" };
+- string cant use cin since it breaks whitespace and accepts only chars
+- string uses its own method std::getline
+  - eg: std::getline(std::cin >> std:ws, name);
+  - std::ws tells code to ignore any leading whitespace before extraction
+- best practice: If using std::getline() to read strings, use std::cin >> std::ws input manipulator to ignore leading whitespace.
+- String length is easy, just use string.length: eg: name.length
+  - C++20 also allows std::ssize(name) to get the length as a signed int
+- Best practice: Don't pass std::string by value, use std::string_view or pass by reference
+- use std::literals to access string literals. s is string, sv is string_view
+- Very minimal support of constexpr std::string was just added in C++20, prefer to use string_view if a constant expression is needed for a string
+- string_view added in C++17
+  - Prefer string_view for any readonly strings, especially function params, as it is faster and less likely to crash
+  - Has full support of constexpr
+  - Can use std::string_view sv{ s }; and compiler will autoconvert string 's' to a string_view
+  - Same works other way around, can use sv to make a string. Can also use static_case<std::string>(sv)'
+- Dont overuse paranthesis, especially with single assignment expressions
+- a lot of math in cmath library #include <cmath>
+- Best practice: Use comma is a separator, avoid using its operator functionality
+- C++ has ? functionality, a ? b : c;
+  - Only use in simple situations, nested ? functions become hard to read
+  - Best practice, always paranthesis the conditional portion of the conditional operator
+  - Conditionals evaluate as expressions, so they can be used for constexpr
+    - Sometimes this is the only choice when using constexpr, if else wont work here
