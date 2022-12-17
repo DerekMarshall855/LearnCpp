@@ -131,3 +131,78 @@ Some short notes for my own benefit, jotting them down as I go. Not organized an
   - Best practice, always paranthesis the conditional portion of the conditional operator
   - Conditionals evaluate as expressions, so they can be used for constexpr
     - Sometimes this is the only choice when using constexpr, if else wont work here
+- use namespace keyword to define your own
+- DO NOT add custom functionality to std namespace
+- Can nest namespaces by regular code convention or namespace foo::goo
+- Can use alias like: namespace id = foo:goo;
+- Recommended to use namespaces to separate application specific code from more reusable code
+- Variable with internal linkage is locked to a single file, external means it can be used in other files
+- You can use the 'static' keyword to make a non-constant global internal
+- Constants are internal by default and ignore 'static' keyword
+- Internal things like constants can be made external using 'extern'
+  - If you do not set a default value to a non-constants extern it is interpreted as a forward declaration of the variable (don't do it)
+- DO NOT use non-constant globals
+  - Always try to use local variables when possible
+- The best prefix for a global variable is '//'
+  - haha lol haha
+- Can use external .h with namespace in the .cpp to store global constants
+- C++17 adds inline constants
+  - Inline variables allow multiple defintions
+  - Linker compiles into 1 definitions
+    - Eg: if you had 10 files using a non-inline variable you end with 10 definitions, if you use inline we get only 1 definition (as if it only exists in one .cpp file)
+  - All definitions of inline variables must be identical
+  - If a file uses an inline variable its defintion must be present within the file
+  - BEST PRACTICE is to use inline constexpr variables in a header file for all global constants (string_view for strings)
+- The static keyword means something different locally
+  - On local files it turns automatic duration to static duration (var now created at start of program, destroyed at end)
+  - Allows functions to remember the value of their variables
+  - Best practice: If using static local variables always declare a default value. The default value will be initialized ONE TIME once the program starts (not when the function is run)
+  - Can use static local constants, variable init is expensive so this can be speed efficient depending on how often the function is run
+  - Avoid static local IF the variable needs to be reset
+- AVOID USING DIRECTIVES (eg: using namespace std)
+  - We prefer explicit naming, this is counterintuitive to that
+  - using declarations are fine when used inside blocks/locally (eg: using std::cout; tells the code what 'cout' is and allows you to do: cout << "stuff";)
+- Inline functions
+  - Better performance at the cost of some readability
+  - Functions all either: must be expanded, can be expanded, or cannot be expanded
+  - If we use the keyword 'inline' on a function it tells the compiler to do inline expansion
+    - reduced function call overhead, faster
+  - Avoid inline functions, contradicts with a functions ability to have multiple defintions (same rules as inline constants)
+  - Some functions will be implicitly treated as inline (class, struct, union type defs, constexpr, consteval)
+- Can mark functions with constexpr return type
+  - Should use if function needs to return compile time constants/is being assigned to a constexpr
+  - These functions are implicity inline as previously mentioned
+  - Can also be evaluated at runtime if using a non-compile time variable as a parameter
+  - A constexpr function that is eligible to be evaluated at compile-time will only be evaluated at compile-time if the return value is used where a constant expression is required. Otherwise, compile-time evaluation is not guaranteed.
+    - Think of it as 'can be used in constexpr' not 'will be evaluated at compile-time'
+  - C++20 adds ability to check if a constant is evaluated at compile time
+    - #include <type_traits> -> std::is_constant_evaluated(); returns true if compile-time evaluation occurs
+  - C++20 adds better way around this as well, consteval functions
+    - consteval MUST be evaluated at compile time, will error if a parameter is only available at runtime
+    - Should use if something must be evaluated at compile time for performance reasons
+- Unname namespace treated as part of the parent namespace
+- Inline namespaces can be used to version content
+  - Anything inside inline namespace considered part of the parent namespace, but not everything inside has internal linkage
+- Use switch over if-else chains when possible
+- Default case goes last
+- Use break; or return; to avoid switch statement fallthrough
+  - Can use [[fallthrough]]; to indicate intentional fallthrough
+- When defining variables inside a switch statement opt to use a block (best practice)
+- Can use goto statements similar to Assembly
+  - eg: tryAgain: 'logic'; if (something) { goto tryAgain; } return 0;
+- Avoid goto over regular loops
+- Use while(true) for intended infinite loops
+  - If counted loop opt for signed int
+  - Favor while loops over do while loops
+- Defining multiple variables (in the init-statement) and using the comma operator (in the end-expression) is acceptable inside a for statement.
+  - eg: for(int x{ 0 }, y{ 9 }; x < 10; ++x, --y) { 'code' } is acceptable
+  - Prefer for loops over whiles when there is an obvious loop variable, otherwise prefer while
+- Can use break; to exit early, or continue; to go to top of loop early
+  - Should do so only when the simplify the loop logic (faster and more readable)
+  - Can use early returns if they simplify the entire functions logic
+- halt exists the program early, liek std::abort;
+  - Should only be used if there is no safe way to return normally to the main function
+  - Should prefer using exceptions (try catch) in all cases to safely handle these errors
+- Write code in small 'units' and write UTs as you go
+  - Can write UTs beforehand and write functions to fit tests, known as test driven development
+  - Always aim for 100% code coverage
