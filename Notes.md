@@ -206,3 +206,20 @@ Some short notes for my own benefit, jotting them down as I go. Not organized an
 - Write code in small 'units' and write UTs as you go
   - Can write UTs beforehand and write functions to fit tests, known as test driven development
   - Always aim for 100% code coverage
+- Use assert to document cases that should be logically impossible
+- When defining a reference with & put the & next to the type, not the variable (best practice, both work)
+- Favor lvalue references to const over lvalue references to non-const unless you need to modify the object being referenced.
+- Best practice: pass fundamental types by value, pass other types or structs by reference
+- Prefer pass by value for objects that are cheap to copy, and pass by const reference for objects that are expensive to copy. If you’re not sure whether an object is cheap or expensive to copy, favor pass by const reference.
+- For pointers place the \* next to the type
+  - Always init the pointers
+- ptr = &y changes what we're pointing to, \*ptr = y changes the value of what is being pointed to
+- Value initialize your pointers (to be null pointers) if you are not initializing them with the address of a valid object.
+- Can use nullptr literal pointer with nullptr keyword
+  - Use nullptr when you need a null pointer literal for initialization, assignment, or passing a null pointer to a function.
+  - A pointer should either hold the address of a valid object, or be set to nullptr. That way we only need to test pointers for null, and can assume any non-null pointer is valid.
+- Favor references over pointers unless the additional capabilities provided by pointers are needed.
+- Prefer pass by reference to pass by address unless you have a specific reason to use pass by address.
+  - Avoid returning references to non-const local static variables.
+  - Prefer return by reference over return by address unless the ability to return “no object” (using nullptr) is important.
+- A Smart pointer is a composition class that is designed to manage dynamically allocated memory and ensure that memory gets deleted when the smart pointer object goes out of scope.

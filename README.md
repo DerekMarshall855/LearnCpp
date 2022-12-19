@@ -32,3 +32,11 @@ such as graphics simulation and game development, so learning cpp is a must. I a
 ### December 16th 2022
 
     Chapter 4.12 - Chapter 7.15
+
+### December 19th 2022
+
+    Chapter 7.15 - Chapter 10.3
+
+### Conclusion
+
+I believe the rest of the book (and even much of what I've done) is review. I've learned all the basic concepts and more complex ones now (smart pointers, references, structs, etc...) and am ready to proceed with my existing knowledge of oop. I will no longer be working through this book and will start my first C++ project Wdnesday December 21st
